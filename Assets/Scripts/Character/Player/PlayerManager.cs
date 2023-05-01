@@ -8,6 +8,8 @@ namespace BO
     public class PlayerManager : CharacterManager
     {
 
+        Vector3 camOffset = new Vector3(0, 2, -2);
+
         PlayerLocomotionManager playerLocomotionManager;
         protected override void Awake()
         {
@@ -15,7 +17,13 @@ namespace BO
 
             playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         }
+        private void Start()
+        {
+            Transform camera = Camera.main.transform;
+            camera.parent = this.transform;
+            camera.localPosition = camOffset;
 
+        }
         protected override void Update()
         {
             base.Update();
